@@ -1,6 +1,7 @@
 .logo{
     height:400px;
-    object-fit: cover;
+    object-fit: contain;
+    width: 400px;
 }
 
 .long-description{
