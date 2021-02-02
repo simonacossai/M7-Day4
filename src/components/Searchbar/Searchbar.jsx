@@ -23,7 +23,7 @@ export default class Searchbar extends Component {
     
     render() {
         return (
-            <Col sm={12}>
+            <Col sm={10} className="search-component">
                 <InputGroup className="mt-3">
                     <InputGroup.Prepend>
                         <InputGroup.Text id="location"><GiPositionMarker/></InputGroup.Text>
