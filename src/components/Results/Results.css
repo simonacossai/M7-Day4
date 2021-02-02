@@ -1,0 +1,25 @@
+.company-description{
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 4; 
+    -webkit-box-orient: vertical;
+}
+.company-logo{
+    height: 130px;
+    object-fit: contain;
+}
+.company-card{
+    box-shadow: 3px 3px 16px rgba(0,0,0,0.3);
+    border-radius: 20px;
+    margin-bottom: 5px solid #000;
+    max-width: 340px;
+}
+
+.company-name{
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 1; 
+    -webkit-box-orient: vertical;
+}

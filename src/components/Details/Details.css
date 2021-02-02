@@ -1,0 +1,12 @@
+.logo{
+    height:400px;
+    object-fit: cover;
+}
+
+.long-description{
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 15; 
+    -webkit-box-orient: vertical;
+}
