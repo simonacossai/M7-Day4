@@ -2,8 +2,19 @@ import React, { Component } from 'react'
 import './Results.css';
 import { Col, Card, Button, Row, Container, Spinner } from 'react-bootstrap';
 import {Link} from 'react-router-dom';
+import { connect } from "react-redux";
+import {GiHeartPlus} from 'react-icons/gi';
 
-export default class Results extends Component {    
+const mapStateToProps = (state) => state;
+const mapDispatchToProps = (dispatch) => ({
+    addToFavourites: (job) =>
+        dispatch({
+            type: "ADD_ITEM_TO_FAVOURITES",
+            payload: job,
+        }),
+});
+class Results extends Component {   
+    componentDidMount(){console.log(this.props)} 
     render() {
         return (
             <>
@@ -26,8 +37,9 @@ export default class Results extends Component {
                                             {e.description}
                                         </Card.Text>
                                         <Link to={`/details/${e.id}`}>
-                                        <Button className="see-more" sm>See more</Button>
+                                        <Button className="see-more mr-2" sm>See more</Button>
                                         </Link>
+                                        <Button className="see-more py-2" onClick={() => this.props.addToFavourites(e)} style={{borderRadius:"50%"}}><GiHeartPlus/></Button>
                                     </Card.Body>
                                 </Card>
                                 </Col>
@@ -41,3 +53,4 @@ export default class Results extends Component {
         )
     }
 }
+export default connect(mapStateToProps, mapDispatchToProps)(Results);

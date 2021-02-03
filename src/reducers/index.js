@@ -15,11 +15,15 @@ export default function (state = {}, action) {
             ...state.favourites,
             jobs: [
               ...state.favourites.jobs.filter(
-                (jobId) => jobId !== action.payload
+                (job) => job.id !== action.payload
               ),
             ],
           },
         };
+        case "JOB_NOT_FOUND":
+            return {
+                error: action.payload+ ": there are no jobs with these parameters",
+            };
       default:
         return state;
     }

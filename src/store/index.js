@@ -4,6 +4,7 @@ import rootReducer from "../reducers";
 const initialState = {
   favourites: {
     jobs: [],
+    error: '',
   },
 };
 

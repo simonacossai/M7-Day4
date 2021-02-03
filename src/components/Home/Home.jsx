@@ -1,10 +1,22 @@
 import React, { Component } from 'react';
 import Searchbar from '../Searchbar/Searchbar';
-import { Container, Row, Jumbotron } from 'react-bootstrap';
+import { Container, Row, Jumbotron, Button } from 'react-bootstrap';
 import Results from '../Results/Results';
 import './Home.css';
+import {Link} from 'react-router-dom'
+import {AiFillHeart} from 'react-icons/ai'
+import {connect} from 'react-redux'
 
-export default class Home extends Component {
+const mapStateToProps = (state) => state;
+const mapDispatchToProps = (dispatch) => ({
+    showError: () =>
+        dispatch({
+            type: "JOB_NOT_FOUND",
+            payload: 404,
+        }),
+});
+
+class Home extends Component {
     state = {
         results: [],
         visible: false,
@@ -21,9 +33,12 @@ export default class Home extends Component {
             if (response.ok) {
                 let results = await response.json()
                 this.setState({ results })
+                if(results.length<=0){
+                   await this.props.showError()
+                    alert(this.props.error)
+                }
                 this.setState({ visible: false })
             } else {
-                console.log('please check again')
                 this.setState({ visible: false })
             }
         } catch (e) {
@@ -39,6 +54,9 @@ export default class Home extends Component {
                         <Container>
                             <Row className="d-flex justify-content-center">
                                 <Searchbar search={this.search} />
+                                <Link to="/favs" style={{zIndex: "200", position: "absolute", top:"10px", right:"10px"}}>
+                                <Button className="search-button mt-3 py-2" style={{borderRadius:"50%"}}><AiFillHeart/></Button>
+                                </Link>
                             </Row>
                         </Container>
                     </Jumbotron>
@@ -48,3 +66,5 @@ export default class Home extends Component {
         )
     }
 }
+
+export default connect(mapStateToProps, mapDispatchToProps)(Home);
