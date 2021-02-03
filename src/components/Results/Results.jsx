@@ -3,7 +3,7 @@ import './Results.css';
 import { Col, Card, Button, Row, Container, Spinner } from 'react-bootstrap';
 import {Link} from 'react-router-dom';
 
-export default class Results extends Component {
+export default class Results extends Component {    
     render() {
         return (
             <>
@@ -32,7 +32,7 @@ export default class Results extends Component {
                                 </Card>
                                 </Col>
                             )
-                        }) : <div></div>}
+                        }) : <div>No results for ur parameters</div>}
                         </>
                 }
                 </Row>

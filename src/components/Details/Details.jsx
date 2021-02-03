@@ -11,7 +11,7 @@ export default class Details extends Component {
     getSingleJob = async () => {
         let id= this.props.match.params.id
         try {
-            let response = await fetch(`https://cors-anywhere.herokuapp.com/https://jobs.github.com/positions/${id}.json`,
+            let response = await fetch(`https://yabba-dabba-duls-cors-anywhere.herokuapp.com/https://jobs.github.com/positions/${id}.json`,
                 {
                     method: 'GET',
                 })
@@ -26,21 +26,25 @@ export default class Details extends Component {
             console.log(e)            
         }
     }
+    description = () => {
+        return { __html: this.state.job.description};
+      };
+    
     componentDidMount(){
         this.getSingleJob()
     }
     render() {
         return (
       <Container>
-          <Row className="d-flex justify-content-center align-items-start mt-5">
+          <Row className="d-flex justify-content-center align-items-center mt-5">
               {this.state.visible ? <Spinner animation="grow" /> : 
               <>
               <Col lg={6} md={12} className="p-5">
                   <img src={this.state.job.company_logo} alt="company-logo" className="logo"/>
               </Col>
-              <Col lg={6} md={12} className="px-4">
+              <Col lg={6} md={12} className="px-4 text-right">
                   <h2>{this.state.job.company}</h2>
-                  <p className="long-description">{this.state.job.description}</p>
+                  <div className="long-description" dangerouslySetInnerHTML={this.description()}></div>
                   <Link to="/"><Button className="see-more">go back</Button></Link>
               </Col>
               </>

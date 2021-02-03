@@ -14,14 +14,13 @@ export default class Home extends Component {
         e.preventDefault();
         this.setState({ visible: true })
         try {
-            let response = await fetch(`https://cors-anywhere.herokuapp.com/https://jobs.github.com/positions.json?description=${position}&location=${location}`,
+            let response = await fetch(`https://yabba-dabba-duls-cors-anywhere.herokuapp.com/https://jobs.github.com/positions.json?description=${position}&location=${location}`,
                 {
                     method: 'GET',
                 })
             if (response.ok) {
                 let results = await response.json()
                 this.setState({ results })
-                console.log(results)
                 this.setState({ visible: false })
             } else {
                 console.log('please check again')

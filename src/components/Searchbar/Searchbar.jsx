@@ -4,6 +4,7 @@ import {InputGroup, FormControl, Col, Button} from 'react-bootstrap';
 import {FcSearch} from 'react-icons/fc';
 import {GiPositionMarker} from 'react-icons/gi';
 import {MdWork} from 'react-icons/md'
+import {AiOutlineSearch} from 'react-icons/ai'
 export default class Searchbar extends Component {
     state = {
         search:{
@@ -18,7 +19,6 @@ export default class Searchbar extends Component {
         let currentId = e.currentTarget.id;
         search[currentId] = e.currentTarget.value;
         this.setState({ search });
-        console.log(this.state.search)
       };
     
     render() {
@@ -50,7 +50,7 @@ export default class Searchbar extends Component {
                         id="position"
                     />
                 </InputGroup>
-                <Button className="d-flex justify-content-center align-items-center text-center mt-2 search-button" onClick={(e)=>this.props.search(e, this.state.search.position, this.state.search.location)}><FcSearch className="mr-2"/>Search</Button>
+                <Button className="d-flex justify-content-center align-items-center text-center mt-2 search-button" onClick={(e)=>this.props.search(e, this.state.search.position, this.state.search.location)}><AiOutlineSearch className="mr-1"/>Search</Button>
             </Col>
         )
     }
