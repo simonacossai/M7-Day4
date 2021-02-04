@@ -5,7 +5,40 @@ import {FcSearch} from 'react-icons/fc';
 import {GiPositionMarker} from 'react-icons/gi';
 import {MdWork} from 'react-icons/md'
 import {AiOutlineSearch} from 'react-icons/ai'
-export default class Searchbar extends Component {
+import {connect} from 'react-redux'
+
+const mapStateToProps = (state) => state;
+const mapDispatchToProps = (dispatch) => ({
+    showError: () =>
+        dispatch({
+            type: "JOB_NOT_FOUND",
+            payload: 404,
+        }),
+        search: (e, position, location) =>
+        dispatch(async (dispatch, getState) => {
+          const resp = await fetch(`https://yabba-dabba-duls-cors-anywhere.herokuapp.com/https://jobs.github.com/positions.json?description=${position}&location=${location}`)
+          const data = await resp.json()
+          console.log(data)
+          console.log('current state: ', getState())
+          if (resp.ok) {
+            dispatch(
+              {
+                type: "STORE_SEARCH_RESULT",
+                payload: data,
+              }
+            )
+          } else {
+            /*dispatch(
+              {
+                type: "SET_ERROR",
+                payload: data,
+              }
+            )*/
+            console.log("errorr")
+          }
+        })
+});
+class Searchbar extends Component {
     state = {
         search:{
             location: '',
@@ -55,3 +88,4 @@ export default class Searchbar extends Component {
         )
     }
 }
+export default connect(mapStateToProps, mapDispatchToProps)(Searchbar);

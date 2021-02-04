@@ -7,26 +7,23 @@ import {GiHeartPlus} from 'react-icons/gi';
 
 const mapStateToProps = (state) => state;
 const mapDispatchToProps = (dispatch) => ({
-    addToFavourites: (job) =>
-        dispatch({
-            type: "ADD_ITEM_TO_FAVOURITES",
-            payload: job,
-        }),
+        addToFavourites: (job) =>
+        dispatch(async (dispatch, getState) => {
+       console.log(job)
+            dispatch({
+                type: "ADD_ITEM_TO_FAVOURITES", 
+                payload: job,
+            })
+        })  
 });
+
 class Results extends Component {   
-    componentDidMount(){console.log(this.props)} 
     render() {
         return (
             <>
             <Container className="d-flex justify-content-center align-items-center text-center">
                 <Row className="d-flex justify-content-center align-items-center text-center">
-                {
-                    this.props.visible ?
-                    <Col className="d-flex justify-content-center align-items-center text-center" md={12} >
-                    <Spinner animation="grow" className="mt-5"/>
-                    </Col>  :
-                    <>
-                        {this.props.results.length > 0 ? this.props.results.map((e) => {
+                        {this.props.results &&  this.props.results.items.map((e) => {
                             return (
                                 <Col md={3} className="my-3">
                                 <Card className="company-card p-2">
@@ -44,9 +41,7 @@ class Results extends Component {
                                 </Card>
                                 </Col>
                             )
-                        }) : <div>No results for ur parameters</div>}
-                        </>
-                }
+                        })}
                 </Row>
                 </Container>
             </>

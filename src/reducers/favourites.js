@@ -3,22 +3,12 @@ export default function (state = {}, action) {
       case "ADD_ITEM_TO_FAVOURITES":
         return {
           ...state,
-          favourites: {
-            ...state.favourites,
-            jobs: state.favourites.jobs.concat(action.payload),
-          },
+          jobs: state.jobs.concat(action.payload),
         };
       case "REMOVE_ITEM_FROM_FAVOURITES":
         return {
           ...state,
-          favourites: {
-            ...state.favourites,
-            jobs: [
-              ...state.favourites.jobs.filter(
-                (job) => job.id !== action.payload
-              ),
-            ],
-          },
+            jobs: state.jobs.filter((job) => job.id !== action.payload),
         };
         case "JOB_NOT_FOUND":
             return {
